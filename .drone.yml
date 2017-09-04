@@ -1,0 +1,42 @@
+pipeline:
+
+  docker-build:
+    image: docker:1.11
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+    commands:
+      - docker build -t pttg-nginx-proxy .
+    when:
+      event: [push, pull_request, tag]
+
+  tag-latest-docker-image:
+    image: docker:1.11
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg" -p=${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-nginx-proxy quay.io/ukhomeofficedigital/pttg-nginx-proxy:build-${DRONE_BUILD_NUMBER}
+      - docker push quay.io/ukhomeofficedigital/pttg-nginx-proxy:build-${DRONE_BUILD_NUMBER}
+    when:
+      event: [push, pull_request]
+
+  tag-docker-image-with-git-tag:
+    image: docker:1.11
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg" -p=${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-nginx-proxy quay.io/ukhomeofficedigital/pttg-nginx-proxy:${DRONE_TAG}
+      - docker tag pttg-nginx-proxy quay.io/ukhomeofficedigital/pttg-nginx-proxy:latest
+      - docker push quay.io/ukhomeofficedigital/pttg-nginx-proxy:${DRONE_TAG}
+      - docker push quay.io/ukhomeofficedigital/pttg-nginx-proxy:latest
+    when:
+      event: tag
+
+services:
+  dind:
+    image: docker:1.11-dind
+    privileged: true
+    command:
+      - "-s"
+      - "overlay"
