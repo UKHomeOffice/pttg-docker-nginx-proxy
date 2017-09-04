@@ -29,7 +29,7 @@ function check-dates {
 
 while [ 1 ]
 do
-	sleep 60s
+	sleep 1h
 	check-dates
 done
 
