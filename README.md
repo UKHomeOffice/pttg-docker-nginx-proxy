@@ -32,14 +32,14 @@ See also the list of [contributors] who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md]
+This project is licensed under the MIT License - see the [LICENCE.md]
 file for details.
 
 [contributors]:                     https://github.com/UKHomeOffice/pttg-docker-nginx-proxy/graphs/contributors
 [andymarke]:                        https://github.com/andymarke
 [docker-nginx-proxy]:               https://github.com/UKHomeOffice/docker-nginx-proxy
 [GitHub]:                           https://github.com/UKHomeOffice/pttg-docker-nginx-proxy
-[LICENSE.md]:                       LICENSE.md
+[LICENCE.md]:                       LICENCE.md
 [Quay.io]:                          https://quay.io/repository/ukhomeofficedigital/pttg-nginx-proxy
 [tags on this repository]:          https://github.com/UKHomeOffice/pttg-docker-nginx-proxy/tags
 [the documentation for that image]: https://github.com/UKHomeOffice/docker-nginx-proxy/blob/master/README.md
